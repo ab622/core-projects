@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Dashboard</title>
+    <link rel="stylesheet" href="/pna/frontend/Instractor/dashboard/dashboard.css">
+    <link rel="stylesheet" href="courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="/pna/Img/PNA.png" alt="PNA Logo" class="pna-logo">
+            </div>
+            <ul class="nav-links">
+                <li >
+                        <div class="icon-wrapper">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <span>Dashboard</span>
+                </li>
+                <li class="nav-item active">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <span>Courses</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span>Students</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-money-bill"></i>
+                    </div>
+                    <span>Transactions</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <span>Chat</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <span>Schedule</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <span>Live Class</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span>Settings</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <span>Logout</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- داخل div.main-content -->
+        <div class="main-content">
+            <!-- Top Section -->
+            <div class="courses-header">
+                <div class="left-section">
+                    <h2>My Teaching Courses</h2>
+                    <button class="add-course-btn" onclick="openModal()">
+                        <i class="fas fa-plus"></i>
+                        Create New Course
+                    </button>
+                </div>
+                <div class="right-section">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search in your courses...">
+                    </div>
+                    <select class="filter-select">
+                        <option value="all">All Courses</option>
+                        <option value="ongoing">Ongoing</option>
+                        <option value="upcoming">Upcoming</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Course Statistics -->
+            <div class="course-stats-container">
+                <div class="stat-card">
+                    <i class="fas fa-book-open"></i>
+                    <div class="stat-info">
+                        <h3>Total Courses</h3>
+                        <span>12</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <div class="stat-info">
+                        <h3>Total Students</h3>
+                        <span>358</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div class="stat-info">
+                        <h3>Hours Taught</h3>
+                        <span>256</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <div class="stat-info">
+                        <h3>Average Rating</h3>
+                        <span>4.8</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Courses Grid -->
+            <div class="courses-grid">
+                <!-- Course Card 1 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/free-react-1-282599.png" alt="Web Development">
+                        <span class="status ongoing">Ongoing</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>Advanced Web Development</h3>
+                        <div class="course-info">
+                            <div class="info-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>Next Class: Today, 2:00 PM</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users"></i>
+                                <span>32 Active Students</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-tasks"></i>
+                                <span>2 Pending Assignments</span>
+                            </div>
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Course Progress</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="action-btn manage" data-tooltip="Manage Course">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                            <button class="action-btn students" data-tooltip="View Students">
+                                <i class="fas fa-users"></i>
+                            </button>
+                            <button class="action-btn assignments" data-tooltip="Assignments">
+                                <i class="fas fa-tasks"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/free-figma-3521426-2944870.png" alt="UI/UX Design">
+                        <span class="status upcoming">Upcoming</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>UI/UX Design Masterclass</h3>
+                        <div class="course-info">
+                            <div class="info-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>Starts: Next Week</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users"></i>
+                                <span>28 Enrolled Students</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-book"></i>
+                                <span>12 Lessons Planned</span>
+                            </div>
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Course Setup</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="action-btn manage" data-tooltip="Manage Course">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                            <button class="action-btn students" data-tooltip="View Students">
+                                <i class="fas fa-users"></i>
+                            </button>
+                            <button class="action-btn assignments" data-tooltip="Assignments">
+                                <i class="fas fa-tasks"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/free-python-3521655-2945099.png" alt="Python Programming">
+                        <span class="status completed">Completed</span>
+                    </div>
+                    <div class="course-content">
+                        <h3>Python Programming Fundamentals</h3>
+                        <div class="course-info">
+                            <div class="info-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Completed: Last Week</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users"></i>
+                                <span>45 Graduates</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.9 Average Rating</span>
+                            </div>
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-header">
+                                <span>Course Completed</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="action-btn manage" data-tooltip="Manage Course">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                            <button class="action-btn students" data-tooltip="View Students">
+                                <i class="fas fa-users"></i>
+                            </button>
+                            <button class="action-btn assignments" data-tooltip="Assignments">
+                                <i class="fas fa-tasks"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Course Modal -->
+    <div id="createCourseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Create New Course</h2>
+            <form id="createCourseForm">
+                <div class="form-group">
+                    <label for="courseName">Course Title</label>
+                    <input type="text" id="courseName" name="courseName" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="courseCategory">Category</label>
+                        <select id="courseCategory" name="courseCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="web">Web Development</option>
+                            <option value="mobile">Mobile Development</option>
+                            <option value="design">UI/UX Design</option>
+                            <option value="programming">Programming</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseLevel">Level</label>
+                        <select id="courseLevel" name="courseLevel" required>
+                            <option value="">Select Level</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="courseDescription">Course Description</label>
+                    <textarea id="courseDescription" name="courseDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate" name="startDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration (weeks)</label>
+                        <input type="number" id="duration" name="duration" min="1" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="courseImage">Course Image</label>
+                    <input type="file" id="courseImage" name="courseImage" accept="image/*" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="maxStudents">Max Students</label>
+                        <input type="number" id="maxStudents" name="maxStudents" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price ($)</label>
+                        <input type="number" id="price" name="price" min="0" step="0.01" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Course</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="courses.js"></script>
+    <script src="/pna/frontend/shared/auth.js"></script>
+</body>
+</html>

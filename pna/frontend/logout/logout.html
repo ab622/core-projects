@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout - CodeLearn</title>
+    <link href="/pna/Img/PNA.png" rel="icon">
+    <link rel="stylesheet" href="logout.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="logout-container">
+        <div class="logout-box">
+            <img src="/pna/Img/PNA.png" alt="CodeLearn Logo" class="logo">
+            <h2>See You Soon!</h2>
+            <p class="message">Are you sure you want to logout from CodeLearn?</p>
+            
+            <div class="user-info">
+                <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png" alt="User Avatar" class="user-avatar">
+                <div class="user-details">
+                    <span id="userName" class="user-name"></span>
+                    <span id="userEmail" class="user-email"></span>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-cancel" onclick="window.history.back()">Cancel</button>
+                <button class="btn btn-logout" id="logoutBtn">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Logout
+                </button>
+            </div>
+
+            <div class="additional-options">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="logoutAll">
+                    <span class="checkmark"></span>
+                    Logout from all devices
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <script src="/pna/frontend/shared/auth.js"></script>
+</body>
+</html> 

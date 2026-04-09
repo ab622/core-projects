@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - إدارة المهام والوقت</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'arabic': ['Tajawal', 'Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Tajawal', 'Inter', sans-serif; }
+        .drag-item { transition: transform 0.2s ease; }
+        .drag-item:hover { transform: translateY(-2px); }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+        .task-priority-high { border-right: 4px solid #ef4444; }
+        .task-priority-medium { border-right: 4px solid #f59e0b; }
+        .task-priority-low { border-right: 4px solid #10b981; }
+        .focus-mode-overlay { backdrop-filter: blur(8px); }
+        [dir="rtl"] .task-priority-high { border-right: none; border-left: 4px solid #ef4444; }
+        [dir="rtl"] .task-priority-medium { border-right: none; border-left: 4px solid #f59e0b; }
+        [dir="rtl"] .task-priority-low { border-right: none; border-left: 4px solid #10b981; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors">
+    <!-- @COMPONENT: AppLayout -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- @COMPONENT: Sidebar -->
+        <div class="w-64 bg-white dark:bg-slate-800 border-l border-slate-200 dark:border-slate-700 flex flex-col">
+            <!-- Logo and User Profile -->
+            <div class="p-6 border-b border-slate-200 dark:border-slate-700">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tasks text-white text-sm"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-slate-900 dark:text-white">TaskFlow</h1>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <!-- Profile photo of a professional person in business attire -->
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&w=40&h=40&fit=crop&crop=face" 
+                         alt="صورة المستخدم" class="w-10 h-10 rounded-full object-cover">
+                    <div>
+                        <p class="font-medium text-sm" data-bind="user.name">أحمد محمد</p>
+                        <p class="text-xs text-slate-500" data-bind="user.email">ahmed@example.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="flex-1 p-4">
+                <ul class="space-y-2">
+                    <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300">
+                        <i class="fas fa-home w-5"></i>
+                        <span>لوحة التحكم</span>
+                    </a></li>
+                    <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700">
+                        <i class="fas fa-list-check w-5"></i>
+                        <span>المهام</span>
+                        <span class="mr-auto bg-slate-200 dark:bg-slate-600 text-xs px-2 py-1 rounded-full" data-bind="tasks.pending">12</span>
+                    </a></li>
+                    <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700">
+                        <i class="fas fa-calendar w-5"></i>
+                        <span>التقويم</span>
+                    </a></li>
+                    <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700">
+                        <i class="fas fa-clock w-5"></i>
+                        <span>وضع التركيز</span>
+                    </a></li>
+                    <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700">
+                        <i class="fas fa-chart-bar w-5"></i>
+                        <span>التحليلات</span>
+                    </a></li>
+                </ul>
+
+                <!-- Categories -->
+                <div class="mt-8">
+                    <h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase mb-3">التصنيفات</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700">
+                            <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                            <span>العمل</span>
+                            <span class="mr-auto text-xs text-slate-500">8</span>
+                        </a></li>
+                        <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700">
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span>شخصي</span>
+                            <span class="mr-auto text-xs text-slate-500">4</span>
+                        </a></li>
+                        <li><a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700">
+                            <div class="w-3 h-3 rounded-full bg-purple-500"></div>
+                            <span>الدراسة</span>
+                            <span class="mr-auto text-xs text-slate-500">3</span>
+                        </a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Settings and Dark Mode Toggle -->
+            <div class="p-4 border-t border-slate-200 dark:border-slate-700">
+                <div class="flex items-center justify-between">
+                    <button class="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+                        <i class="fas fa-cog"></i>
+                        <span>الإعدادات</span>
+                    </button>
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: Sidebar -->
+
+        <!-- @COMPONENT: MainContent -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- @COMPONENT: TopBar -->
+            <header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">لوحة التحكم</h2>
+                        <p class="text-slate-600 dark:text-slate-400 mt-1">مرحباً أحمد، لديك 5 مهام لإنجازها اليوم</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <!-- Search -->
+                        <div class="relative">
+                            <input type="text" placeholder="البحث في المهام..." 
+                                   class="pl-10 pr-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+                            <i class="fas fa-plus"></i>
+                            <span>مهمة جديدة</span>
+                        </button>
+                        
+                        <!-- Notifications -->
+                        <button class="relative p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+                            <i class="fas fa-bell text-lg"></i>
+                            <span class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <!-- @END_COMPONENT: TopBar -->
+
+            <!-- @COMPONENT: DashboardContent -->
+            <main class="flex-1 overflow-auto p-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
+                    <!-- @COMPONENT: TasksSection -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <!-- Today's Tasks -->
+                        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+                            <div class="p-6 border-b border-slate-200 dark:border-slate-700">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-lg font-semibold text-slate-900 dark:text-white">مهام اليوم</h3>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-sm text-slate-600 dark:text-slate-400">5 من 8</span>
+                                        <div class="w-16 h-2 bg-slate-200 dark:bg-slate-700 rounded-full">
+                                            <div class="w-10 h-2 bg-primary-600 rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-6 space-y-4 max-h-96 overflow-y-auto">
+                                <!-- @MAP: tasks.today.map(task => ( -->
+                                <div class="task-priority-high bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4 drag-item cursor-move" data-mock="true">
+                                    <div class="flex items-start gap-3">
+                                        <input type="checkbox" class="mt-1 rounded border-slate-300 dark:border-slate-600 text-primary-600 focus:ring-primary-500">
+                                        <div class="flex-1">
+                                            <h4 class="font-medium text-slate-900 dark:text-white">إنهاء تقرير المشروع الشهري</h4>
+                                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">مراجعة البيانات وكتابة التحليل النهائي</p>
+                                            <div class="flex items-center gap-4 mt-3 text-xs text-slate-500 dark:text-slate-400">
+                                                <span class="flex items-center gap-1">
+                                                    <i class="fas fa-clock"></i>
+                                                    45 دقيقة
+                                                </span>
+                                                <span class="flex items-center gap-1">
+                                                    <i class="fas fa-tag"></i>
+                                                    عمل
+                                                </span>
+                                                <span class="flex items-center gap-1 text-red-600">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                    عالية
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <button class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+                                                <i class="fas fa-calendar-plus"></i>
+                                            </button>
+                                            <button class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="task-priority-medium bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4 drag-item cursor-move" data-mock="true">
+                                    <div class="flex items-start gap-3">
+                                        <input type="checkbox" checked class="mt-1 rounded border-slate-300 dark:border-slate-600 text-primary-600 focus:ring-primary-500">
+                                        <div class="flex-1 opacity-75">
+                                            <h4 class="font-medium text-slate-900 dark:text-white line-through">مراجعة رسائل البريد الإلكتروني</h4>
+                                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">الرد على الرسائل المهمة</p>
+                                            <div class="flex items-center gap-4 mt-3 text-xs text-slate-500 dark:text-slate-400">
+                                                <span class="flex items-center gap-1">
+                                                    <i class="fas fa-clock"></i>
+                                                    20 دقيقة
+                                                </span>
+                                                <span class="flex items-center gap-1">
+                                                    <i class="fas fa-tag"></i>
+                                                    عمل
+                                                </span>
+                                                <span class="flex items-center gap-1 text-amber-600">
+                                                    <i class="fas fa-minus-circle"></i>
+                                                    متوسطة
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="task-priority-low bg-slate-50 dark:bg-slate-700/50 rounded-lg p-4 drag-item cursor-move" data-mock="true">
+                                    <div class="flex items-start gap-3">
+                                        <input type="checkbox" class="mt-1 rounded border-slate-300 dark:border-slate-600 text-primary-600 focus:ring-primary-500">
+                                        <div class="flex-1">
+                                            <h4 class="font-medium text-slate-900 dark:text-white">تحديث الملف الشخصي على LinkedIn</h4>
+                                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">إضافة المهارات الجديدة والخبرات</p>
+                                            <div class="flex items-center gap-4 mt-3 text-xs text-slate-500 dark:text-slate-400">
+                                                <span class="flex items-center gap-1">
+                                                    <i class="fas fa-clock"></i>
+                                                    15 دقيقة
+                                                </span>
+                                                <span class="flex items-center gap-1">
+                                                    <i class="fas fa-tag"></i>
+                                                    شخصي
+                                                </span>
+                                                <span class="flex items-center gap-1 text-green-600">
+                                                    <i class="fas fa-arrow-down"></i>
+                                                    منخفضة
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- @END_MAP )) -->
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-2xl font-bold text-slate-900 dark:text-white" data-bind="stats.completed">23</p>
+                                        <p class="text-sm text-slate-600 dark:text-slate-400">مهمة مكتملة</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-clock text-blue-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-2xl font-bold text-slate-900 dark:text-white" data-bind="stats.timeSpent">4.5</p>
+                                        <p class="text-sm text-slate-600 dark:text-slate-400">ساعة اليوم</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: TasksSection -->
+
+                    <!-- @COMPONENT: CalendarSection -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <!-- Focus Mode Card -->
+                        <div class="bg-gradient-to-l from-primary-600 to-primary-700 rounded-xl shadow-sm text-white p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-2">وضع التركيز</h3>
+                                    <p class="text-primary-100 mb-4">ابدأ جلسة Pomodoro للتركيز العميق</p>
+                                    <button class="bg-white text-primary-600 px-4 py-2 rounded-lg font-medium hover:bg-primary-50 transition-colors">
+                                        <i class="fas fa-play ml-2"></i>
+                                        ابدأ التركيز
+                                    </button>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-3xl font-bold mb-1">25:00</div>
+                                    <div class="text-primary-200 text-sm">جاهز للبدء</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Weekly Calendar View -->
+                        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+                            <div class="p-6 border-b border-slate-200 dark:border-slate-700">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-4">
+                                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white">التقويم الأسبوعي</h3>
+                                        <div class="flex bg-slate-100 dark:bg-slate-700 rounded-lg p-1">
+                                            <button class="px-3 py-1 text-sm rounded-md bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm">أسبوع</button>
+                                            <button class="px-3 py-1 text-sm rounded-md text-slate-600 dark:text-slate-400">شهر</button>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                        <span class="text-sm font-medium text-slate-900 dark:text-white px-4">16 - 22 ديسمبر 2024</span>
+                                        <button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-6">
+                                <!-- Calendar Header -->
+                                <div class="calendar-grid gap-1 mb-4">
+                                    <div class="text-center text-sm font-medium text-slate-600 dark:text-slate-400 py-2">الأحد</div>
+                                    <div class="text-center text-sm font-medium text-slate-600 dark:text-slate-400 py-2">الاثنين</div>
+                                    <div class="text-center text-sm font-medium text-slate-600 dark:text-slate-400 py-2">الثلاثاء</div>
+                                    <div class="text-center text-sm font-medium text-slate-600 dark:text-slate-400 py-2">الأربعاء</div>
+                                    <div class="text-center text-sm font-medium text-slate-600 dark:text-slate-400 py-2">الخميس</div>
+                                    <div class="text-center text-sm font-medium text-slate-600 dark:text-slate-400 py-2">الجمعة</div>
+                                    <div class="text-center text-sm font-medium text-slate-600 dark:text-slate-400 py-2">السبت</div>
+                                </div>
+
+                                <!-- Calendar Days -->
+                                <div class="calendar-grid gap-1">
+                                    <!-- @MAP: weekDays.map(day => ( -->
+                                    <div class="min-h-32 p-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-700/30" data-mock="true">
+                                        <div class="text-sm font-medium text-slate-900 dark:text-white mb-2">16</div>
+                                        <div class="space-y-1">
+                                            <div class="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-2 py-1 rounded cursor-move drag-item">
+                                                اجتماع فريق العمل
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="min-h-32 p-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-700/30" data-mock="true">
+                                        <div class="text-sm font-medium text-slate-900 dark:text-white mb-2">17</div>
+                                        <div class="space-y-1">
+                                            <div class="text-xs bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-2 py-1 rounded cursor-move drag-item">
+                                                كتابة المقال
+                                            </div>
+                                            <div class="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 px-2 py-1 rounded cursor-move drag-item">
+                                                مراجعة الكود
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="min-h-32 p-2 border-2 border-primary-500 rounded-lg bg-primary-50 dark:bg-primary-900/20" data-mock="true">
+                                        <div class="text-sm font-medium text-primary-700 dark:text-primary-300 mb-2">18 <span class="text-xs">(اليوم)</span></div>
+                                        <div class="space-y-1">
+                                            <div class="text-xs bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 px-2 py-1 rounded cursor-move drag-item">
+                                                تقرير المشروع
+                                            </div>
+                                            <div class="text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 px-2 py-1 rounded cursor-move drag-item">
+                                                مراجعة البريد
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="min-h-32 p-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-700/30" data-mock="true">
+                                        <div class="text-sm font-medium text-slate-900 dark:text-white mb-2">19</div>
+                                    </div>
+
+                                    <div class="min-h-32 p-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-700/30" data-mock="true">
+                                        <div class="text-sm font-medium text-slate-900 dark:text-white mb-2">20</div>
+                                        <div class="space-y-1">
+                                            <div class="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-2 py-1 rounded cursor-move drag-item">
+                                                عرض العميل
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="min-h-32 p-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-700/30" data-mock="true">
+                                        <div class="text-sm font-medium text-slate-900 dark:text-white mb-2">21</div>
+                                    </div>
+
+                                    <div class="min-h-32 p-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-700/30" data-mock="true">
+                                        <div class="text-sm font-medium text-slate-900 dark:text-white mb-2">22</div>
+                                    </div>
+                                    <!-- @END_MAP )) -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analytics Overview -->
+                        <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
+                            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">تحليل الأداء</h3>
+                            <div class="grid grid-cols-3 gap-6">
+                                <div class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-3 relative">
+                                        <svg class="w-16 h-16 transform -rotate-90">
+                                            <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="4" fill="transparent" class="text-slate-200 dark:text-slate-700"/>
+                                            <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="4" fill="transparent" stroke-dasharray="175.93" stroke-dashoffset="44" class="text-green-500"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="text-lg font-bold text-slate-900 dark:text-white">75%</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400">معدل الإنجاز</p>
+                                </div>
+                                
+                                <div class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-3 relative">
+                                        <svg class="w-16 h-16 transform -rotate-90">
+                                            <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="4" fill="transparent" class="text-slate-200 dark:text-slate-700"/>
+                                            <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="4" fill="transparent" stroke-dasharray="175.93" stroke-dashoffset="70" class="text-blue-500"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="text-lg font-bold text-slate-900 dark:text-white">60%</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400">الوقت المستغل</p>
+                                </div>
+                                
+                                <div class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-3 relative">
+                                        <svg class="w-16 h-16 transform -rotate-90">
+                                            <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="4" fill="transparent" class="text-slate-200 dark:text-slate-700"/>
+                                            <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="4" fill="transparent" stroke-dasharray="175.93" stroke-dashoffset="105" class="text-purple-500"/>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <span class="text-lg font-bold text-slate-900 dark:text-white">40%</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400">وضع التركيز</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: CalendarSection -->
+                </div>
+            </main>
+            <!-- @END_COMPONENT: DashboardContent -->
+        </div>
+        <!-- @END_COMPONENT: MainContent -->
+    </div>
+    <!-- @END_COMPONENT: AppLayout -->
+
+    <!-- @COMPONENT: FocusModeModal (Hidden by default) -->
+    <div id="focus-mode-modal" class="fixed inset-0 bg-black/50 focus-mode-overlay hidden flex items-center justify-center z-50" data-event="click:closeFocusMode">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4" onclick="event.stopPropagation()">
+            <div class="text-center">
+                <div class="w-24 h-24 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-brain text-primary-600 text-3xl"></i>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">وضع التركيز</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-8">جلسة Pomodoro - 25 دقيقة تركيز عميق</p>
+                
+                <div class="text-6xl font-mono font-bold text-primary-600 mb-8" data-bind="timer.display">25:00</div>
+                
+                <div class="flex gap-4 justify-center">
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors">
+                        <i class="fas fa-play"></i>
+                        <span>ابدأ</span>
+                    </button>
+                    <button class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-900 dark:text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors">
+                        <i class="fas fa-pause"></i>
+                        <span>إيقاف</span>
+                    </button>
+                    <button class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-900 dark:text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors" data-event="click:closeFocusMode">
+                        <i class="fas fa-times"></i>
+                        <span>إغلاق</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: FocusModeModal -->
+
+    <!-- @COMPONENT: NotificationToast (Hidden by default) -->
+    <div id="notification-toast" class="fixed top-4 left-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg p-4 max-w-sm hidden transform translate-x-full transition-transform">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+                <i class="fas fa-check text-green-600 text-sm"></i>
+            </div>
+            <div class="flex-1">
+                <h4 class="font-medium text-slate-900 dark:text-white">تم إنجاز المهمة!</h4>
+                <p class="text-sm text-slate-600 dark:text-slate-400">مراجعة رسائل البريد الإلكتروني</p>
+            </div>
+            <button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: NotificationToast -->
+
+    <script>
+        (function() {
+            // Dark mode toggle functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            
+            // Check for saved theme preference or default to 'light'
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            if (currentTheme === 'dark') {
+                html.classList.add('dark');
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                html.classList.toggle('dark');
+                const theme = html.classList.contains('dark') ? 'dark' : 'light';
+                localStorage.setItem('theme', theme);
+            });
+
+            // Focus mode modal
+            const focusModeButtons = document.querySelectorAll('[data-event*="focusMode"]');
+            const focusModeModal = document.getElementById('focus-mode-modal');
+            
+            // Show focus mode modal when clicking focus mode button
+            document.querySelector('.bg-gradient-to-l button').addEventListener('click', function() {
+                focusModeModal.classList.remove('hidden');
+            });
+
+            // Close focus mode modal
+            function closeFocusMode() {
+                focusModeModal.classList.add('hidden');
+            }
+            
+            focusModeModal.addEventListener('click', function(e) {
+                if (e.target === focusModeModal) {
+                    closeFocusMode();
+                }
+            });
+
+            // Drag and drop simulation (visual feedback only)
+            const dragItems = document.querySelectorAll('.drag-item');
+            dragItems.forEach(item => {
+                item.addEventListener('dragstart', function(e) {
+                    e.dataTransfer.effectAllowed = 'move';
+                    this.style.opacity = '0.5';
+                });
+                
+                item.addEventListener('dragend', function(e) {
+                    this.style.opacity = '1';
+                });
+                
+                item.setAttribute('draggable', true);
+            });
+
+            // Task completion simulation
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:not([checked])');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        const taskContainer = this.closest('.drag-item');
+                        taskContainer.classList.add('opacity-75');
+                        const taskTitle = taskContainer.querySelector('h4');
+                        taskTitle.classList.add('line-through');
+                        
+                        // Show notification
+                        showNotification();
+                    }
+                });
+            });
+
+            // Show notification
+            function showNotification() {
+                const toast = document.getElementById('notification-toast');
+                toast.classList.remove('hidden', 'translate-x-full');
+                setTimeout(() => {
+                    toast.classList.add('translate-x-full');
+                    setTimeout(() => {
+                        toast.classList.add('hidden');
+                    }, 300);
+                }, 3000);
+            }
+
+            // TODO: Implement Pomodoro timer functionality
+            // TODO: Implement automatic task scheduling algorithm
+            // TODO: Implement real drag and drop with backend persistence
+            // TODO: Implement task creation, editing, and deletion
+            // TODO: Implement calendar event management
+            // TODO: Implement analytics data fetching and visualization
+            // TODO: Implement user authentication and profile management
+            // TODO: Implement push notifications and reminders
+            // TODO: Implement task categories and filtering
+            // TODO: Implement data persistence with PostgreSQL and Prisma
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <link href="/pna/Img/PNA.png" rel="icon">
+    <link rel="stylesheet" href="message.css">
+    <link rel="stylesheet" href="/pna/frontend/Student/user_profile/home2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="/pna/frontend/home1/home1.html">
+                <img src="/pna/Img/PNA.png" alt="PNA Logo">
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="/pna/frontend/Student/user_dashboard/userdashboard.html" class="nav-item">
+                <i class="bi bi-house-fill"></i>
+            </a>
+            <a href="/pna/frontend/Student/Cirteficate/cirteficate.html" class="nav-item ">
+                <i class="bi bi-mortarboard-fill"></i>
+            </a>
+            <a href="/pna/frontend/Student/user_profile/home2.html" class="nav-item">
+                <i class="bi bi-person-fill"></i>
+            </a>
+            <a href="#" class="nav-item active">
+                <i class="bi bi-envelope-fill"></i>
+            </a>
+            <a href="/pna/frontend/Student/Setting/setting.html" class="nav-item">
+                <i class="bi bi-gear-fill"></i>
+            </a>
+        </div>
+        <a href="/pna/frontend/logout/logout.html" class="nav-item bottom-link">
+            <i class="bi bi-box-arrow-right"></i>
+        </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="welcome-section">
+            <h2>Messages</h2>
+            <p class="subtitle">Stay connected with your instructors and fellow students</p>
+        </section>
+
+        <div class="messages-container">
+            <!-- Messages List -->
+            <div class="messages-list">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search messages...">
+                </div>
+
+                <!-- Message Items -->
+                <div class="message-item active">
+                    <div class="avatar">
+                        <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png" alt="User Avatar">
+                        <span class="status online"></span>
+                    </div>
+                    <div class="message-preview">
+                        <div class="message-info">
+                            <h4>John Smith</h4>
+                            <span class="time">2:30 PM</span>
+                        </div>
+                        <p>Hello! How are you doing with the Python course?</p>
+                    </div>
+                </div>
+
+                <div class="message-item">
+                    <div class="avatar">
+                        <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png" alt="User Avatar">
+                        <span class="status offline"></span>
+                    </div>
+                    <div class="message-preview">
+                        <div class="message-info">
+                            <h4>Sarah Johnson</h4>
+                            <span class="time">Yesterday</span>
+                        </div>
+                        <p>Thank you for your help with the assignment!</p>
+                    </div>
+                </div>
+
+                <!-- Add more message items as needed -->
+            </div>
+
+            <!-- Chat Area -->
+            <div class="chat-area">
+                <div class="chat-header">
+                    <div class="chat-user-info">
+                        <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png" alt="John Smith">
+                        <div>
+                            <h3>John Smith</h3>
+                            <span class="status-text">Online</span>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button class="action-btn"><i class="bi bi-telephone"></i></button>
+                        <button class="action-btn"><i class="bi bi-camera-video"></i></button>
+                        <button class="action-btn"><i class="bi bi-three-dots-vertical"></i></button>
+                    </div>
+                </div>
+
+                <div class="chat-messages">
+                    <!-- Received Message -->
+                    <div class="message received">
+                        <div class="message-content">
+                            <p>Hello! How are you doing with the Python course?</p>
+                            <span class="message-time">2:30 PM</span>
+                        </div>
+                    </div>
+
+                    <!-- Sent Message -->
+                    <div class="message sent">
+                        <div class="message-content">
+                            <p>Hi! It's going great, thanks for asking. I just completed the functions module.</p>
+                            <span class="message-time">2:31 PM</span>
+                        </div>
+                    </div>
+
+                    <!-- Add more messages as needed -->
+                </div>
+
+                <div class="chat-input">
+                    <button class="attachment-btn">
+                        <i class="bi bi-paperclip"></i>
+                    </button>
+                    <input type="text" placeholder="Type your message...">
+                    <button class="emoji-btn">
+                        <i class="bi bi-emoji-smile"></i>
+                    </button>
+                    <button class="send-btn">
+                        <i class="bi bi-send-fill"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="message.js"></script>
+    <script src="/pna/frontend/shared/auth.js"></script>
+</body>
+</html>

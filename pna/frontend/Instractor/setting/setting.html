@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link href="/pna/Img/PNA.png" rel="icon">
+    <link rel="stylesheet" href="setting.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/pna/frontend/Instractor/dashboard/dashboard.css">
+</head>
+<body>
+    <!-- Replace old sidebar with new one -->
+    <nav class="sidebar">
+        <div class="logo">
+            <img src="/pna/Img/PNA.png" alt="PNA Logo" class="pna-logo">
+        </div>
+        <ul class="nav-links">
+            <li>
+                <div class="icon-wrapper">
+                    <i class="fas fa-th-large"></i>
+                </div>
+                <span>Dashboard</span>
+            </li>
+            <li>
+                <div class="icon-wrapper">
+                    <i class="fas fa-book"></i>
+                </div>
+                <span>Courses</span>
+            </li>
+            <li>
+                <div class="icon-wrapper">
+                    <i class="fas fa-users"></i>
+                </div>
+                <span>Students</span>
+            </li>
+            <li>
+                <div class="icon-wrapper">
+                    <i class="fas fa-money-bill"></i>
+                </div>
+                <span>Transactions</span>
+            </li>
+            <li>
+                <div class="icon-wrapper">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <span>Chat</span>
+            </li>
+            <li>
+                <div class="icon-wrapper">
+                    <i class="fas fa-calendar"></i>
+                </div>
+                <span>Schedule</span>
+            </li>
+            <li>
+                <div class="icon-wrapper">
+                    <i class="fas fa-video"></i>
+                </div>
+                <span>Live Class</span>
+            </li>
+            <li class="active">
+                <div class="icon-wrapper">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <span>Settings</span>
+            </li>
+            <li>
+                <div class="icon-wrapper">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                <span>Logout</span>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="settings-wrapper">
+            <div class="settings-content-area">
+                <div class="settings-welcome">
+                    <h2>Settings</h2>
+                    <p class="subtitle">Manage your account settings and preferences</p>
+                </div>
+                
+                <div class="settings-layout">
+                    <!-- Side Tabs -->
+                    <div class="settings-tabs">
+                        <div class="settings-tab-item" data-tab="account">
+                            <i class="fas fa-user"></i>
+                            Account Settings
+                        </div>
+                        <div class="settings-tab-item" data-tab="notifications">
+                            <i class="fas fa-bell"></i>
+                            Notifications
+                        </div>
+                        <div class="settings-tab-item" data-tab="privacy">
+                            <i class="fas fa-shield-alt"></i>
+                            Privacy & Security
+                        </div>
+                        <div class="settings-tab-item" data-tab="learning">
+                            <i class="fas fa-graduation-cap"></i>
+                            Learning Preferences
+                        </div>
+                        <div class="settings-tab-item" data-tab="payment">
+                            <i class="fas fa-credit-card"></i>
+                            Payment Methods
+                        </div>
+                        <div class="settings-tab-item" data-tab="language">
+                            <i class="fas fa-globe"></i>
+                            Language & Region
+                        </div>
+                    </div>
+
+                    <!-- Content Sections -->
+                    <div class="settings-content">
+                        <!-- المحتوى الحالي -->
+                        <div class="settings-decoration"></div>
+
+                        <!-- Account Settings Section -->
+                        <div class="settings-section" id="account">
+                            <div class="settings-section-group">
+                                <h3>Profile Information</h3>
+                                <div class="settings-profile-section">
+                                    <div class="profile-image-section">
+                                        <img src="/pna/Img/Amr.jpg" alt="Profile" class="profile-avatar">
+                                        <div class="profile-upload-buttons">
+                                            <button class="settings-btn settings-btn-primary">
+                                                <i class="fas fa-camera"></i>
+                                                Upload Photo
+                                            </button>
+                                            <button class="settings-btn settings-btn-secondary">
+                                                <i class="fas fa-trash"></i>
+                                                Remove
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="profile-details">
+                                        <div class="form-row">
+                                            <div class="form-col">
+                                                <div class="settings-form-group">
+                                                    <label>First Name</label>
+                                                    <input type="text" placeholder="Enter first name">
+                                                </div>
+                                            </div>
+                                            <div class="form-col">
+                                                <div class="settings-form-group">
+                                                    <label>Last Name</label>
+                                                    <input type="text" placeholder="Enter last name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="settings-form-group">
+                                            <label>Email Address</label>
+                                            <input type="email" placeholder="Enter your email">
+                                        </div>
+                                        <div class="settings-form-group">
+                                            <label>Phone Number</label>
+                                            <input type="tel" placeholder="Enter your phone number">
+                                        </div>
+                                        <div class="settings-form-group">
+                                            <label>Bio</label>
+                                            <textarea placeholder="Tell us about yourself" rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Decorative Image -->
+                        <div class="settings-decoration">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+                                <style>
+                                    .gear { fill: #209dd8; }
+                                    .person { fill: #1a7fb0; }
+                                    @keyframes rotate {
+                                        from { transform: rotate(0deg); }
+                                        to { transform: rotate(360deg); }
+                                    }
+                                    .gear { animation: rotate 20s linear infinite; }
+                                </style>
+                                <g class="gear">
+                                    <circle cx="250" cy="250" r="100"/>
+                                    <path d="M250 100v-50M250 450v-50M400 250h50M50 250h50M365 135l35-35M100 400l35-35M365 365l35 35M100 100l35 35"/>
+                                    <circle cx="250" cy="250" r="80" fill="white"/>
+                                </g>
+                                <g class="person">
+                                    <circle cx="250" cy="200" r="40"/>
+                                    <path d="M200 350c0-50 100-50 100 0"/>
+                                    <path d="M220 280c-30 20-40 40-40 70M280 280c30 20 40 40 40 70"/>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <!-- Notifications Section -->
+                        <div class="settings-section" id="notifications">
+                            <div class="settings-section-group">
+                                <h3>Email Notifications</h3>
+                                <div class="settings-toggle">
+                                    <label>Course Updates</label>
+                                    <div class="settings-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="settings-slider"></span>
+                                    </div>
+                                </div>
+                                <div class="settings-toggle">
+                                    <label>New Messages</label>
+                                    <div class="settings-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="settings-slider"></span>
+                                    </div>
+                                </div>
+                                <div class="settings-toggle">
+                                    <label>Assignment Reminders</label>
+                                    <div class="settings-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="settings-slider"></span>
+                                    </div>
+                                </div>
+                                <div class="settings-toggle">
+                                    <label>Course Recommendations</label>
+                                    <div class="settings-switch">
+                                        <input type="checkbox">
+                                        <span class="settings-slider"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Privacy & Security Section -->
+                        <div class="settings-section" id="privacy">
+                            <div class="settings-section-group">
+                                <h3>Password Settings</h3>
+                                <div class="form-row">
+                                    <div class="form-col">
+                                        <div class="settings-form-group">
+                                            <label>Current Password</label>
+                                            <input type="password" placeholder="Enter current password">
+                                        </div>
+                                        <div class="settings-form-group">
+                                            <label>New Password</label>
+                                            <input type="password" placeholder="Enter new password">
+                                        </div>
+                                        <div class="settings-form-group">
+                                            <label>Confirm New Password</label>
+                                            <input type="password" placeholder="Confirm new password">
+                                        </div>
+                                        <button class="settings-btn settings-btn-primary">
+                                            <i class="fas fa-key"></i> Update Password
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-section-group">
+                                <h3>Privacy Settings</h3>
+                                <div class="settings-toggle">
+                                    <label>Profile Visibility</label>
+                                    <div class="settings-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="settings-slider"></span>
+                                    </div>
+                                </div>
+                                <div class="settings-toggle">
+                                    <label>Show Online Status</label>
+                                    <div class="settings-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="settings-slider"></span>
+                                    </div>
+                                </div>
+                                <div class="settings-toggle">
+                                    <label>Allow Messages from Non-Contacts</label>
+                                    <div class="settings-switch">
+                                        <input type="checkbox">
+                                        <span class="settings-slider"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Learning Preferences Section -->
+                        <div class="settings-section" id="learning">
+                            <div class="settings-section-group">
+                                <h3>Learning Style</h3>
+                                <div class="settings-form-group">
+                                    <label>Preferred Learning Method</label>
+                                    <select class="settings-select">
+                                        <option>Video Lessons</option>
+                                        <option>Text-based Content</option>
+                                        <option>Interactive Exercises</option>
+                                        <option>Audio Lessons</option>
+                                    </select>
+                                </div>
+                                <div class="settings-form-group">
+                                    <label>Difficulty Level</label>
+                                    <select class="settings-select">
+                                        <option>Beginner</option>
+                                        <option>Intermediate</option>
+                                        <option>Advanced</option>
+                                        <option>Expert</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="settings-section-group">
+                                <h3>Study Schedule</h3>
+                                <div class="settings-form-group">
+                                    <label>Preferred Study Time</label>
+                                    <select class="settings-select">
+                                        <option>Morning</option>
+                                        <option>Afternoon</option>
+                                        <option>Evening</option>
+                                        <option>Night</option>
+                                    </select>
+                                </div>
+                                <div class="settings-form-group">
+                                    <label>Weekly Study Goal (hours)</label>
+                                    <input type="number" min="1" max="40" value="10">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Methods Section -->
+                        <div class="settings-section" id="payment">
+                            <div class="settings-section-group">
+                                <h3>Payment Methods</h3>
+                                <div class="payment-cards-list">
+                                    <!-- Existing Card -->
+                                    <div class="payment-card">
+                                        <div class="card-info">
+                                            <i class="fas fa-credit-card"></i>
+                                            <span>•••• •••• •••• 4242</span>
+                                            <span class="card-expiry">Expires 12/24</span>
+                                        </div>
+                                        <button class="settings-btn settings-btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button class="settings-btn settings-btn-primary mt-20">
+                                    <i class="fas fa-plus"></i> Add New Card
+                                </button>
+                            </div>
+
+                            <div class="settings-section-group">
+                                <h3>Billing Address</h3>
+                                <div class="form-row">
+                                    <div class="form-col">
+                                        <div class="settings-form-group">
+                                            <label>Street Address</label>
+                                            <input type="text" placeholder="Enter street address">
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="settings-form-group">
+                                            <label>City</label>
+                                            <input type="text" placeholder="Enter city">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-col">
+                                        <div class="settings-form-group">
+                                            <label>State/Province</label>
+                                            <input type="text" placeholder="Enter state">
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="settings-form-group">
+                                            <label>ZIP/Postal Code</label>
+                                            <input type="text" placeholder="Enter ZIP code">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Language & Region Section -->
+                        <div class="settings-section" id="language">
+                            <div class="settings-section-group">
+                                <h3>Language Settings</h3>
+                                <div class="settings-form-group">
+                                    <label>Interface Language</label>
+                                    <select class="settings-select">
+                                        <option>English (US)</option>
+                                        <option>Arabic</option>
+                                        <option>French</option>
+                                        <option>German</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </div>
+                                <div class="settings-form-group">
+                                    <label>Content Language</label>
+                                    <select class="settings-select">
+                                        <option>English (US)</option>
+                                        <option>Arabic</option>
+                                        <option>French</option>
+                                        <option>German</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="settings-section-group">
+                                <h3>Regional Settings</h3>
+                                <div class="settings-form-group">
+                                    <label>Time Zone</label>
+                                    <select class="settings-select">
+                                        <option>UTC+02:00 Cairo</option>
+                                        <option>UTC+00:00 London</option>
+                                        <option>UTC-05:00 New York</option>
+                                        <option>UTC+01:00 Paris</option>
+                                    </select>
+                                </div>
+                                <div class="settings-form-group">
+                                    <label>Date Format</label>
+                                    <select class="settings-select">
+                                        <option>DD/MM/YYYY</option>
+                                        <option>MM/DD/YYYY</option>
+                                        <option>YYYY/MM/DD</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="setting.js"></script>
+    <script src="/pna/frontend/shared/auth.js"></script>
+</body>
+</html>

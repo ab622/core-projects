@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications</title>
+    <link href="/pna/Img/PNA.png" rel="icon">
+    <link rel="stylesheet" href="cirteficate.css">
+    <link rel="stylesheet" href="/pna/frontend/Student/user_profile/home2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="/pna/frontend/home1/home1.html">
+                <img src="/pna/Img/PNA.png" alt="PNA Logo">
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="/pna/frontend/Student/user_dashboard/userdashboard.html" class="nav-item">
+                <i class="bi bi-house-fill"></i>
+            </a>
+            <a href="" class="nav-item active">
+                <i class="bi bi-mortarboard-fill"></i>
+            </a>
+            <a href="/pna/frontend/Student/user_profile/home2.html" class="nav-item">
+                <i class="bi bi-person-fill"></i>
+            </a>
+            <a href="/pna/frontend/Student/Message/message.html" class="nav-item">
+                <i class="bi bi-envelope-fill"></i>
+            </a>
+            <a href="/pna/frontend/Student/Setting/setting.html" class="nav-item">
+                <i class="bi bi-gear-fill"></i>
+            </a>
+        </div>
+        <a href="/pna/frontend/logout/logout.html" class="nav-item bottom-link">
+            <i class="bi bi-box-arrow-right"></i>
+        </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="welcome-section">
+            <h2>Your Achievements</h2>
+            <p class="subtitle">Track your learning journey and showcase your skills with earned certificates.</p>
+        </section>
+
+        <div class="certificates-grid">
+            <!-- Certificate Card -->
+            <div class="certificate-card">
+                <div class="certificate-image">
+                    <img src="https://via.placeholder.com/400x300?text=Python+Certificate" alt="Python Certificate">
+                    <div class="certificate-overlay">
+                        <button class="view-btn">View Certificate</button>
+                        <button class="download-btn">Download</button>
+                    </div>
+                </div>
+                <div class="certificate-info">
+                    <h3>Python Programming</h3>
+                    <p class="completion-date">Completed on: January 15, 2024</p>
+                    <div class="certificate-meta">
+                        <span class="course-duration">Duration: 30 Hours</span>
+                        <span class="certificate-id">ID: CERT-PY-2024-001</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Certificate Cards -->
+            <div class="certificate-card">
+                <div class="certificate-image">
+                    <img src="https://via.placeholder.com/400x300?text=Java+Certificate" alt="Java Certificate">
+                    <div class="certificate-overlay">
+                        <button class="view-btn">View Certificate</button>
+                        <button class="download-btn">Download</button>
+                    </div>
+                </div>
+                <div class="certificate-info">
+                    <h3>Java Development</h3>
+                    <p class="completion-date">Completed on: February 1, 2024</p>
+                    <div class="certificate-meta">
+                        <span class="course-duration">Duration: 45 Hours</span>
+                        <span class="certificate-id">ID: CERT-JV-2024-002</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more certificate cards as needed -->
+        </div>
+    </main>
+    <script src="cirteficate.js"></script>
+    <script src="/pna/frontend/shared/auth.js"></script>
+</body>
+</html>

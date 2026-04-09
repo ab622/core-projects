@@ -1,0 +1,40 @@
+خطوات تنفيذ المشروع:
+
+1. إنشاء وإعداد المشروع:
+$ mkdir Part3 && cd Part3
+$ git init
+
+2. إنشاء الملفات الأساسية:
+- app.py: تطبيق Flask مع نقطتي نهاية POST و DELETE
+- requirements.txt: يحتوي على التبعيات (flask)
+- Dockerfile: لحاوية التطبيق
+
+3. تهيئة Git وإضافة الملفات:
+$ git add .
+$ git commit -m "Initial commit"
+$ git remote add origin <your-repo-url>
+$ git push -u origin main
+
+4. بناء ورفع صورة Docker:
+$ docker build -t your-dockerhub-username/ghaymah-exam-api .
+$ docker push your-dockerhub-username/ghaymah-exam-api
+
+5. تثبيت وإعداد Ghaymah CLI:
+$ wget http://cli.ghaymah.cloud/ghaymah
+$ chmod +x ghaymah
+$ ./ghaymah signup --email=yourmattermostusername@example.com --password=your_secure_password
+
+6. نشر التطبيق على Ghaymah:
+$ ./ghaymah deploy your-dockerhub-username/ghaymah-exam-api --port 5000 --name my-ghaymah-exam-deployment
+
+7. اختبار API:
+# إضافة عنصر
+$ curl -X POST -H "Content-Type: application/json" -d '{"item":"apple"}' http://your-deployed-url/items
+
+# حذف عنصر
+$ curl -X DELETE http://your-deployed-url/items/apple
+
+ملاحظات:
+- تأكد من تغيير your-dockerhub-username إلى اسم المستخدم الخاص بك على Docker Hub
+- تأكد من تغيير your-deployed-url إلى عنوان URL الذي تم إرجاعه من Ghaymah بعد النشر
+- يمكنك استخدام Postman أو أي أداة مماثلة لاختبار API

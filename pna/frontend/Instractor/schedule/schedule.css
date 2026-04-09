@@ -1,0 +1,807 @@
+/* Reset default margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f6fa;
+    overflow-x: hidden; /* منع الـ scroll الأفقي */
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Content Area */
+.main-content {
+    margin-left: 0px; /* محاذاة مع الشريط الجانبي */
+    min-height: 100vh;
+    padding: 20 px; /* إزالة الـ padding */
+    width: calc(100% - 250px);
+    box-sizing: border-box;
+}
+
+/* Content Wrapper - NEW */
+.content-wrapper {
+    padding: 15px 20px; /* إضافة padding داخلي */
+    width: 100%;
+}
+
+/* Stats Container */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Schedule Grid */
+.schedule-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    max-height: 550px;
+}
+
+/* Stats Card - Common Style */
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 15px rgba(0, 150, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 150, 255, 0.1);
+}
+
+.stat-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0096ff 0%, #00c6ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-icon i {
+    color: white;
+    font-size: 18px;
+    z-index: 2;
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-info h3 {
+    color: #666;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    white-space: nowrap;
+}
+
+.stat-info .number {
+    color: #0096ff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Calendar Section */
+.calendar-container {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 15px rgba(0, 150, 255, 0.05);
+    height: 550px;
+    overflow: auto;
+}
+
+.calendar-container:hover {
+    box-shadow: 0 5px 20px rgba(0, 150, 255, 0.1);
+}
+
+/* Calendar Container Header */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #0096ff 0%, #00c6ff 100%);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 150, 255, 0.2);
+    transform: translateY(0);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 150, 255, 0.3);
+}
+
+.calendar-header h2 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    padding-left: 5px;
+}
+
+.calendar-header h2::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: white;
+    transition: height 0.3s ease;
+}
+
+.calendar-header:hover h2::before {
+    height: 80%;
+}
+
+/* Shine Effect */
+.calendar-header::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(45deg);
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+.calendar-header:hover::after {
+    animation: shine 1.5s ease-in-out;
+}
+
+@keyframes shine {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translateX(-100%);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translateX(100%);
+    }
+}
+
+/* Remove header buttons */
+.calendar-actions {
+    display: none;
+}
+
+/* Upcoming Classes Section */
+.upcoming-classes {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 15px rgba(0, 150, 255, 0.05);
+    height: 550px;
+    overflow: auto;
+}
+
+/* Upcoming Classes Header */
+.upcoming-classes h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #0096ff 0%, #00c6ff 100%);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 150, 255, 0.2);
+    transform: translateY(0);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.upcoming-classes h3:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 150, 255, 0.3);
+}
+
+.upcoming-classes h3::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(45deg);
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+.upcoming-classes h3:hover::after {
+    animation: shine 1.5s ease-in-out;
+}
+
+.class-card {
+    padding: 15px;
+    border-radius: 10px;
+    background: #f8f9fe;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.class-card:hover {
+    transform: translateX(5px);
+    background: linear-gradient(135deg, #f8f9fe 0%, #ffffff 100%);
+    box-shadow: 0 2px 10px rgba(0, 150, 255, 0.1);
+}
+
+.class-time {
+    background: linear-gradient(135deg, #0096ff 0%, #00c6ff 100%);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(0, 150, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.class-info h4 {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.class-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Add Class Button */
+.add-class-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #1a237e;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.add-class-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .schedule-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1a237e;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #283593;
+}
+
+/* Loading Animation */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #0096ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.toast {
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+/* Animations */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* FullCalendar Header Buttons */
+.fc .fc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5em;
+}
+
+.fc .fc-toolbar-title {
+    color: #333;
+    font-size: 1.2rem !important;
+    font-weight: 600;
+}
+
+/* Common Button Styles */
+.fc .fc-button {
+    background: transparent !important;
+    border: 1.5px solid #0096ff !important;
+    color: #0096ff !important;
+    padding: 8px 20px !important;
+    border-radius: 25px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin: 0 5px !important;
+    text-transform: capitalize !important;
+    box-shadow: none !important;
+}
+
+/* Hover State */
+.fc .fc-button:hover {
+    background: rgba(0, 150, 255, 0.1) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 150, 255, 0.2) !important;
+}
+
+/* Active/Selected State */
+.fc .fc-button-active,
+.fc .fc-button.fc-button-active {
+    background: #0096ff !important;
+    color: white !important;
+    border-color: #0096ff !important;
+    box-shadow: 0 4px 12px rgba(0, 150, 255, 0.2) !important;
+}
+
+/* Today Button */
+.fc .fc-today-button {
+    background: #0096ff !important;
+    color: white !important;
+}
+
+.fc .fc-today-button:disabled {
+    background: rgba(0, 150, 255, 0.5) !important;
+    color: white !important;
+    opacity: 1 !important;
+    cursor: not-allowed !important;
+}
+
+/* Prev/Next Buttons */
+.fc .fc-prev-button,
+.fc .fc-next-button {
+    padding: 8px 12px !important;
+    font-size: 16px !important;
+}
+
+/* Button Group Spacing */
+.fc .fc-button-group {
+    gap: 5px;
+}
+
+/* Focus State */
+.fc .fc-button:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(0, 150, 255, 0.3) !important;
+}
+
+/* Hover Animation */
+@keyframes buttonPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 150, 255, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 150, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 150, 255, 0);
+    }
+}
+
+.fc .fc-button:not(:disabled):hover {
+    animation: buttonPulse 1.5s infinite;
+}
+
+/* Remove old stats containers */
+.stats-container-bottom {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .stats-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Add Button Styling */
+.add-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0096ff 0%, #00c6ff 100%);
+    color: white;
+    border: none;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 150, 255, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.add-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 150, 255, 0.4);
+}
+
+.add-button:active {
+    transform: scale(0.95);
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    backdrop-filter: blur(5px);
+}
+
+.modal {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modal.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h2 {
+    color: #1a237e;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #ff4444;
+    transform: rotate(90deg);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #1a237e;
+    box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.cancel-button {
+    background: #f5f5f5;
+    color: #666;
+}
+
+.cancel-button:hover {
+    background: #eee;
+}
+
+.save-button {
+    background: linear-gradient(135deg, #1e2f97 0%, #1a237e 100%);
+    color: white;
+}
+
+.save-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2);
+}
+
+/* Show Modal */
+.modal-overlay.show {
+    display: flex;
+}
+
+/* Modal Styling */
+.swal2-popup {
+    border-radius: 15px !important;
+    padding: 20px !important;
+}
+
+.swal2-title {
+    color: #0096ff !important;
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    padding-bottom: 15px !important;
+    margin-bottom: 20px !important;
+    border-bottom: 1px solid #eee !important;
+}
+
+/* Input Fields */
+.swal2-input {
+    width: 100% !important;
+    padding: 12px !important;
+    margin: 8px 0 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+}
+
+.swal2-input:focus {
+    border-color: #0096ff !important;
+    box-shadow: 0 0 0 3px rgba(0, 150, 255, 0.1) !important;
+    outline: none !important;
+}
+
+/* Select Dropdown */
+.swal2-select {
+    width: 100% !important;
+    padding: 12px !important;
+    margin: 8px 0 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+}
+
+.swal2-select:focus {
+    border-color: #0096ff !important;
+    box-shadow: 0 0 0 3px rgba(0, 150, 255, 0.1) !important;
+    outline: none !important;
+}
+
+/* Buttons */
+.swal2-confirm {
+    background: linear-gradient(135deg, #0096ff 0%, #00c6ff 100%) !important;
+    padding: 10px 24px !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+}
+
+.swal2-cancel {
+    background: #f5f5f5 !important;
+    color: #666 !important;
+    padding: 10px 24px !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+}
+
+.swal2-confirm:hover {
+    background: linear-gradient(135deg, #00a8ff 0%, #00d8ff 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 150, 255, 0.2) !important;
+}
+
+.swal2-cancel:hover {
+    background: #eee !important;
+}
+
+/* Hide Scrollbar but Keep Functionality */
+.fc-scroller {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.fc-scroller::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+/* For the main calendar container */
+.calendar-container {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.calendar-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* For any other scrollable elements in the calendar */
+.fc .fc-scrollgrid-section-body > td {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.fc .fc-scrollgrid-section-body > td::-webkit-scrollbar {
+    display: none;
+}
+
+/* Ensure smooth scrolling remains */
+.fc-scroller {
+    overflow-y: scroll !important;
+    scroll-behavior: smooth;
+}

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management Dashboard</title>
+    <link rel="stylesheet" href="/pna/frontend/Instractor/dashboard/dashboard.css">
+    <link rel="stylesheet" href="Students.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="/pna/Img/PNA.png" alt="PNA Logo" class="pna-logo">
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <span>Dashboard</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <span>Courses</span>
+                </li>
+                <li class="nav-item active">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span>Students</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-money-bill"></i>
+                    </div>
+                    <span>Transactions</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <span>Chat</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <span>Schedule</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <span>Live Class</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span>Settings</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <span>Logout</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="top-header">
+                <div class="search-filters">
+                    <div class="search-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search students...">
+                    </div>
+                    <select class="filter-select">
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="all">All Levels</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                    <button class="header-add-btn" onclick="openModal()">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Student</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Grid -->
+            <div class="top-sections">
+                <!-- Student Management Section -->
+                <div class="student-management">
+                    <div class="table-container">
+                        <table class="students-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Student ID</th>
+                                    <th>Level</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="students-list">
+                                <tr>
+                                    <td>John Smith</td>
+                                    <td>john@example.com</td>
+                                    <td>STD-001</td>
+                                    <td>Advanced</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Sarah Wilson</td>
+                                    <td>sarah@example.com</td>
+                                    <td>STD-002</td>
+                                    <td>Intermediate</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Michael Brown</td>
+                                    <td>michael@example.com</td>
+                                    <td>STD-003</td>
+                                    <td>Beginner</td>
+                                    <td><span class="status-badge inactive">Inactive</span></td>
+                                    <td>
+                                        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Emma Davis</td>
+                                    <td>emma@example.com</td>
+                                    <td>STD-004</td>
+                                    <td>Advanced</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Quick Stats Section -->
+                <div class="performance-stats">
+                    <h2>Quick Stats</h2>
+                    <div class="stats-container">
+                        <div class="stats-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Active Students</h3>
+                                <div class="stat-value">2,845</div>
+                                <div class="stat-trend positive">
+                                    <i class="fas fa-arrow-up"></i> +120
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stats-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Course Progress</h3>
+                                <div class="stat-value">92%</div>
+                                <div class="stat-trend positive">
+                                    <i class="fas fa-arrow-up"></i> +8%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stats-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Average Time</h3>
+                                <div class="stat-value">4.2h</div>
+                                <div class="stat-trend negative">
+                                    <i class="fas fa-arrow-down"></i> -0.5h
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div class="reports-activities">
+                <h2>Reports & Activities</h2>
+                <div class="reports-content">
+                    <div class="report-card">
+                        <div class="report-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="report-details">
+                            <h3>Weekly Progress Report</h3>
+                            <p>Average Progress: 85%</p>
+                            <span class="report-date">Last update: Today</span>
+                        </div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="report-details">
+                            <h3>Attendance Statistics</h3>
+                            <p>Attendance Rate: 92%</p>
+                            <span class="report-date">Last update: Yesterday</span>
+                        </div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="report-details">
+                            <h3>Performance Assessment</h3>
+                            <p>Average Score: 78/100</p>
+                            <span class="report-date">Last update: 2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Student Modal -->
+    <div id="addStudentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Add New Student</h2>
+            <form id="addStudentForm">
+                <div class="form-group">
+                    <label for="studentName">Full Name</label>
+                    <input type="text" id="studentName" name="studentName" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentEmail">Email</label>
+                    <input type="email" id="studentEmail" name="studentEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentId">Student ID</label>
+                    <input type="text" id="studentId" name="studentId" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentLevel">Level</label>
+                        <select id="studentLevel" name="studentLevel" required>
+                            <option value="">Select Level</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentStatus">Status</label>
+                        <select id="studentStatus" name="studentStatus" required>
+                            <option value="">Select Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Student</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="Students.js"></script>
+    <script src="/pna/frontend/shared/auth.js"></script>
+</body>
+</html>

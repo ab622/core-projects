@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor Chats</title>
+    <link rel="stylesheet" href="/pna/frontend/Instractor/dashboard/dashboard.css">
+    <link rel="stylesheet" href="/pna/frontend/Instractor/chats/chats.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="chats.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="/pna/Img/PNA.png" alt="PNA Logo" class="pna-logo">
+            </div>
+            <ul class="nav-links">
+                <li data-page="/pna/frontend/Instractor/dashboard/dashboard.html" onclick="window.location.href='/pna/frontend/Instractor/dashboard/dashboard.html'">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <span>Dashboard</span>
+                </li>
+                <li data-page="/pna/frontend/Instractor/Courses/courses.html" onclick="window.location.href='/pna/frontend/Instractor/Courses/courses.html'">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <span>Courses</span>
+                </li>
+                <li data-page="/pna/frontend/Instractor/Students/students.html" onclick="window.location.href='/pna/frontend/Instractor/Students/students.html'">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span>Students</span>
+                </li>
+                <li data-page="/pna/frontend/Instractor/Transactions/transactions.html" onclick="window.location.href='/pna/frontend/Instractor/Transactions/transactions.html'">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-money-bill"></i>
+                    </div>
+                    <span>Transactions</span>
+                </li>
+                <li class="active" data-page="/pna/frontend/Instractor/chats/chats.html">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <span>Chat</span>
+                </li>
+                <li data-page="/pna/frontend/Instractor/Schedule/schedule.html" onclick="window.location.href='/pna/frontend/Instractor/Schedule/schedule.html'">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <span>Schedule</span>
+                </li>
+                <li data-page="/pna/frontend/Instractor/LiveClass/liveclass.html" onclick="window.location.href='/pna/frontend/Instractor/liveclass/liveclass.html'">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <span>Live Class</span>
+                </li>
+                <li data-page="/pna/frontend/Instractor/Setting/settings.html"onclick="window.location.href='/pna/frontend/Instractor/Setting/settings.html'">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span>Settings</span>
+                </li>
+                <li onclick="window.location.href='/pna/frontend/login.html'">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <span>Logout</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="chat-container">
+                <!-- Chat Sidebar -->
+                <div class="chat-sidebar">
+                    <div class="chat-sidebar-header">
+                        <h3>Chats</h3>
+                        <span class="unread-count">3 Unread</span>
+                    </div>
+                    
+                    <div class="chat-search">
+                        <input type="text" id="chat-search-input" placeholder="Search chats...">
+                    </div>
+                    
+                    <div class="chat-filters">
+                        <select id="status-filter">
+                            <option value="">All Status</option>
+                            <option value="unread">Unread</option>
+                            <option value="read">Read</option>
+                        </select>
+                        <select id="time-filter">
+                            <option value="">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+                    </div>
+
+                    <div id="chat-list" class="chat-list">
+                        <div class="chat-list-item active" data-student-id="1">
+                            <div class="avatar">
+                                <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png" alt="Student">
+                                <div class="status online"></div>
+                            </div>
+                            <div class="chat-list-item-details">
+                                <div class="chat-list-item-name">Ahmed Mohamed</div>
+                                <div class="chat-list-item-preview">Hey, can we discuss the assignment?</div>
+                            </div>
+                            <div class="chat-list-item-meta">
+                                <small class="timestamp">10:30 AM</small>
+                                <span class="unread-badge">1</span>
+                            </div>
+                        </div>
+                        <div class="chat-list-item" data-student-id="2">
+                            <div class="avatar">
+                                <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png" alt="Student">
+                                <div class="status offline"></div>
+                            </div>
+                            <div class="chat-list-item-details">
+                                <div class="chat-list-item-name">Fatima Ali</div>
+                                <div class="chat-list-item-preview">I missed the last lecture...</div>
+                            </div>
+                            <div class="chat-list-item-meta">
+                                <small class="timestamp">Yesterday</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Window -->
+                <div class="chat-window">
+                    <div class="chat-window-header">
+                        <div class="chat-header-info">
+                            <div class="avatar">
+                                <img src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png" alt="Student Profile">
+                                <div class="status online"></div>
+                            </div>
+                            <div class="student-details">
+                                <h3>Ahmed Mohamed</h3>
+                                <span class="online-status">
+                                    Online
+                                </span>
+                            </div>
+                        </div>
+                        <div class="chat-window-actions">
+                            <button class="btn-action btn-add-group" title="Create Group">
+                                <i class="fas fa-users"></i> Add Group
+                            </button>
+                            <button class="btn-action btn-video-call" title="Video Call">
+                                <i class="fas fa-video"></i>
+                            </button>
+                            <button class="btn-action btn-audio-call" title="Audio Call">
+                                <i class="fas fa-phone"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="messages-container" class="messages-container">
+                        <!-- Messages will be dynamically populated -->
+                    </div>
+
+                    <div class="message-input-section">
+                        <div class="input-actions">
+                            <button id="btn-attach-file" class="btn-attach-file">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                            <button id="btn-attach-image" class="btn-attach-image">
+                                <i class="fas fa-image"></i>
+                            </button>
+                            <button id="btn-emoji" class="btn-emoji">
+                                <i class="far fa-smile"></i>
+                            </button>
+                            <button id="btn-voice-record" class="btn-voice-record">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                        </div>
+                        <div class="message-input-wrapper">
+                            <input type="text" id="message-input" placeholder="Type your message...">
+                            <div id="typing-indicator" class="typing-indicator">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <button id="send-message-btn" class="btn-send">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="chats.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Function to open chat with a specific student
+        function openChatWithStudent(studentId, studentName, studentAvatar) {
+            // Store student details in localStorage
+            localStorage.setItem('selectedChatStudent', JSON.stringify({
+                id: studentId,
+                name: studentName,
+                avatar: studentAvatar
+            }));
+            
+            // Redirect to chat page
+            window.location.href = '/frontend/Instractor/chats/chats.html';
+        }
+    </script>
+    <script src="/pna/frontend/shared/auth.js"></script>
+</body>
+</html>

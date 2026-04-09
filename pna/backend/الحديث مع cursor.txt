@@ -1,0 +1,106 @@
+بص يا معلم 
+حاليا احنا شغالين مشروع منصة تعليمية PNA Academy
+بص معايا واحدة واحدة كدا 
+اول شي احنا خلصنا ال frontend لل student و ال instractor 
+ال admin متعملش لسا بس مش مشكلة حاليا هبعتلك صورة من كل حاجة بقولهالك 
+جوه ملف ال front end 
+الصفحات الي جواه 
+home1 دي الواجهة بتاعت المنصة قبل ال login , register 
+هيا بتوديك عليهم
+وعندك ال login , register  
+و فولدر ال student 
+و فولدر ال instractor
+كل فولدر جواه التلت صفحات الاساسية الخاصة بالصفحة html , css , js, 
+وعاملين الصفحة الي هيتعرض فيها الفيديوهات 
+الي هيا في فولدر course_datails
+بالنسبة لل logout موجود في الاتنين بس هنخرجه برا لانه واحد ونفس الشكل والتنسيق 
+دا بالنسبة للفرونت 
+في اي مشاكل مش مفهومة لحديت هنا 
+----------------------------------------------------------------------------
+   frontend/
+   ├── home1/                 # الصفحة الرئيسية قبل تسجيل الدخول
+   ├── Login/                 # صفحة تسجيل الدخول
+   ├── Register/              # صفحة التسجيل
+   ├── Student/              
+   │   ├── Cirtificate/
+   │   ├── course_details/    # صفحة عرض الفيديوهات
+   │   ├── logout/
+   │   ├── Message/
+   │   ├── Setting/
+   │   ├── user_dashboard/
+   │   └── user_profile/
+   └── Instructor/
+       ├── chat/
+       ├── Courses/
+       ├── dashboard/
+       ├── liveClass/
+       ├── logout/
+       ├── schedule/
+       ├── setting/
+       ├── student/
+       └── transaction/
+-------------------------------------------------------------------------------------------------------------------------------------------------
+pna/
+├── backend/
+│   ├── includes/
+│   │   ├── functions.php
+│   │   ├── auth_middleware.php  👈 (هنا)
+│   │   └── ...
+│   ├── config/
+│   │   └── connection.php
+│   ├── login.php
+│   └── register.php
+└── frontend/
+    └── ...
+---------------------------------------------------------------------------
+هننقله بس لما نشوف هنعمل ايه الاول 
+بص بقا عاوزين اصلا نشتغل backend 
+ركز معايا احنا شغالين php علي php admin
+بص اشتغلنا جزء وهوه جزء ال login , register 
+بص ملفات ال login و ال register  الي هيا js بتاعت ال backend دمجتها مع ملف ال js الخاص بال front
+بص فولدر ال api فاضي 
+انا عملت لصق علي اكواد ال connection.php و ال functions.php
+فولدر ال student, instractor فاضيين 
+جواهم هعمل فولد لكل صفحة في الفرونت يكون هنا للباك اند بس 
+هبعتلك كود ال database hii:
+
+-- إنشاء قاعدة البيانات
+CREATE DATABASE pna_academy;
+USE pna_academy;
+
+-- جدول المستخدمين
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    user_type ENUM('student', 'instructor', 'admin') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- جدول معلومات الطلاب
+CREATE TABLE student_profiles (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    full_name VARCHAR(255),
+    phone VARCHAR(20),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- جدول معلومات المدرسين
+CREATE TABLE instructor_profiles (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    full_name VARCHAR(255),
+    specialization VARCHAR(255),
+    bio TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+دا كود ال database 
+بص لما يعمل login علي حسب هوه  student او instractor 
+بيوديه لصفحاتهم الخاصة
+فهمت الدنيا كدا وايه الي معملول 
+ال loginو ال register شغالين تمام جدا 
+وتقريبا معمولين Token و ليس sessions واكدلي علي المعلومة دي ارجوك
+

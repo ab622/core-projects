@@ -1,0 +1,468 @@
+/* Modern Background & Scrollbar */
+body {
+    background: #f1f5f9;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    overflow-x: hidden;
+    
+    overflow: hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+    border-radius: 4px;
+}
+
+/* Main Container Enhancement */
+.course-container {
+    display: flex;
+    gap: 30px;
+    padding: 30px;
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    min-height: calc(100vh - 40px);
+    max-width: 1500px;
+    margin: 20px auto;
+    border-radius: 25px;
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06),
+        0 0 0 1px rgba(0, 0, 0, 0.02);
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Video Section Refinements */
+.video-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 1100px;
+    width: 100%;
+    padding: 15px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.05),
+        0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border-bottom: none;
+}
+
+.video-player {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #1e293b;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Action Buttons Container */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    padding: 18px;
+    background: transparent;
+    justify-content: center;
+    border-bottom: none !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Common Button Styles */
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+    border: 1px solid #e5e7eb;
+    color: #64748b;
+    cursor: pointer;
+}
+
+/* Like Button */
+.like-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.like-btn.active {
+    background: #fee2e2;
+    border-color: #fecaca;
+    color: #ef4444;
+}
+
+.like-btn.active i {
+    animation: heartBeat 0.3s ease-in-out;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+
+/* Save Course Button */
+.save-btn {
+    background: #10b981;
+    border-color: #10b981;
+    color: white;
+}
+
+.save-btn:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
+}
+
+/* Comment Button */
+.comment-btn:hover {
+    background: #6366f1;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2);
+}
+
+.comment-btn.active {
+    background: #6366f1;
+    color: white;
+}
+
+/* View Content Button */
+.view-btn {
+    background: #10b981;
+    border-color: #10b981;
+    color: white;
+}
+
+.view-btn:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
+}
+
+/* Download Button */
+.download-btn {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+.download-btn:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+}
+
+/* Right Column Refinements */
+.right-column {
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 10px 5px;
+}
+
+/* White Boxes Polish */
+.white-box {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.05),
+        0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+    border-bottom: none !important;
+}
+
+.white-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 12px -1px rgba(0, 0, 0, 0.08),
+        0 4px 8px -1px rgba(0, 0, 0, 0.04);
+}
+
+/* Textarea Enhancement */
+textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    resize: none;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: all 0.2s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Button Refinements */
+.load-more-btn, .submit-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.load-more-btn:hover, .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+/* Loading Animation Enhancement */
+.loading-dots {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.loading-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3b82f6;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* Dots Header */
+.dots-header {
+    display: flex;
+    gap: 6px;
+    padding: 10px;
+    border-bottom: 2px solid transparent;
+    background-image: linear-gradient(white, white), 
+                     linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.dot.blue { background: #3b82f6; }
+.dot.purple { background: #8b5cf6; }
+.dot.pink { background: #ec4899; }
+
+/* Loading Content */
+.loading-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.loading-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.loading-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3b82f6;
+}
+
+/* Comment Content */
+.comment-content {
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+textarea {
+    width: 90%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    color: #64748b;
+    transition: all 0.3s ease;
+}
+
+textarea:focus {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #3b82f6;
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+}
+
+/* Submit Button Animation */
+.submit-btn {
+    width: 90%;
+    margin: 0 auto;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(45deg, #2563eb, #7c3aed);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+}
+
+/* Active state for like button */
+.like-btn.active {
+    background: #fee2e2;
+}
+
+/* Loading Animation */
+.loading-dot {
+    transition: opacity 0.3s ease;
+    opacity: 0.3;
+}
+
+/* Textarea Focus Effect */
+textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Submit Button Loading State */
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Gradient Border Animation */
+.dots-header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    background: linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899);
+    animation: gradientMove 2s linear infinite;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Responsive Design Improvements */
+@media (max-width: 1400px) {
+    .video-section {
+        max-width: 1000px;
+    }
+}
+
+/* Background Improvements */
+body {
+    background: #f1f5f9;
+    min-height: 100vh;
+}
+
+/* Remove any horizontal lines */
+.course-container::after,
+.video-section::after,
+.action-buttons::after {
+    display: none !important;
+}
+
+/* Additional cleanup */
+.video-section {
+    border-bottom: none !important;
+}
+
+.white-box {
+    border-bottom: none !important;
+}
+
+/* Remove any default borders */
+* {
+    border-bottom: none !important;
+}
+
+.feedback-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.feedback-input {
+    width: 90%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 15px;
+    color: #64748b;
+    transition: all 0.3s ease;
+}
+
+.feedback-content textarea {
+    width: 90%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    color: #64748b;
+    min-height: 100px;
+    transition: all 0.3s ease;
+}
+
+.feedback-input:focus,
+.feedback-content textarea:focus {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #3b82f6;
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+    outline: none;
+}

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule - Instructor Dashboard</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/pna/frontend/Instractor/dashboard/dashboard.css">
+    <link rel="stylesheet" href="schedule.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- FullCalendar CSS -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css' rel='stylesheet'>
+    
+    <!-- SweetAlert2 CSS -->
+    <link href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css' rel='stylesheet'>
+    
+    <!-- Tippy.js CSS -->
+    <link href='https://unpkg.com/tippy.js@6/dist/tippy.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="/pna/Img/PNA.png" alt="PNA Logo" class="pna-logo">
+            </div>
+            <ul class="nav-links">
+                <li >
+                        <div class="icon-wrapper">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <span>Dashboard</span>
+                </li>
+                <li >
+                        <div class="icon-wrapper">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <span>Courses</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span>Students</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-money-bill"></i>
+                    </div>
+                    <span>Transactions</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <span>Chat</span>
+                </li>
+                <li class="nav-item active">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <span>Schedule</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <span>Live Class</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span>Settings</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <span>Logout</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Stats Section -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Today's Classes</h3>
+                        <div class="number">5</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Students</h3>
+                        <div class="number">125</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Completed Classes</h3>
+                        <div class="number">48</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Courses</h3>
+                        <div class="number">12</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Average Rating</h3>
+                        <div class="number">4.8</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock-rotate-left"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Hours Taught</h3>
+                        <div class="number">156</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schedule Grid -->
+            <div class="schedule-grid">
+                <!-- Calendar Section -->
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <h2>Class Schedule</h2>
+                        <div class="calendar-actions">
+                            <button class="btn btn-outline-primary">Month</button>
+                            <button class="btn btn-outline-primary">Week</button>
+                            <button class="btn btn-outline-primary">Day</button>
+                        </div>
+                    </div>
+                    <div id="calendar"></div>
+                </div>
+
+                <!-- Upcoming Classes -->
+                <div class="upcoming-classes">
+                    <h3>Upcoming Classes</h3>
+                    <div class="class-card">
+                        <div class="class-time">
+                            <div>09:00</div>
+                            <div>AM</div>
+                        </div>
+                        <div class="class-info">
+                            <h4>Web Development</h4>
+                            <p>Introduction to HTML</p>
+                            <p><i class="fas fa-users"></i> 15 students</p>
+                        </div>
+                    </div>
+                    <!-- Add more class cards as needed -->
+                </div>
+            </div>
+
+            <!-- Add Button -->
+            <button class="add-button" onclick="showModal()">+</button>
+
+            <!-- Modal -->
+            <div class="modal-overlay" id="modalOverlay">
+                <div class="modal">
+                    <div class="modal-header">
+                        <h2>Add New Class</h2>
+                        <button class="close-modal" onclick="hideModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="className">Class Name</label>
+                            <input type="text" id="className" placeholder="Enter class name">
+                        </div>
+                        <div class="form-group">
+                            <label for="classDate">Date</label>
+                            <input type="date" id="classDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="classTime">Time</label>
+                            <input type="time" id="classTime">
+                        </div>
+                        <div class="form-group">
+                            <label for="classType">Class Type</label>
+                            <select id="classType">
+                                <option value="">Select class type</option>
+                                <option value="lecture">Lecture</option>
+                                <option value="workshop">Workshop</option>
+                                <option value="seminar">Seminar</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-button cancel-button" onclick="hideModal()">Cancel</button>
+                        <button class="modal-button save-button">Save Class</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    
+    <!-- Your JavaScript -->
+    <script src="schedule.js"></script>
+    <script src="/pna/frontend/shared/auth.js"></script>
+</body>
+</html>

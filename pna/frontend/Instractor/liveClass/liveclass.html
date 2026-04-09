@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Classes</title>
+    <link rel="stylesheet" href="/pna/frontend/Instractor/dashboard/dashboard.css">
+    <link rel="stylesheet" href="liveclass.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar from dashboard -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="/pna/Img/PNA.png" alt="PNA Logo" class="pna-logo">
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <span>Dashboard</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <span>Courses</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span>Students</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-money-bill"></i>
+                    </div>
+                    <span>Transactions</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <span>Chat</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <span>Schedule</span>
+                </li>
+                <li class="active">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <span>Live Class</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span>Settings</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <span>Logout</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Stats Overview -->
+            <div class="overview-stats">
+                <div class="stat-card">
+                    <i class="fas fa-calendar"></i>
+                    <h3>1</h3>
+                    <p>SCHEDULED CLASSES</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-play-circle"></i>
+                    <h3>1</h3>
+                    <p>ONGOING CLASSES</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>1</h3>
+                    <p>COMPLETED CLASSES</p>
+                </div>
+            </div>
+
+            <!-- Search and Actions Section -->
+            <div class="search-filter-section">
+                <!-- Search -->
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Search classes">
+                </div>
+                
+                <!-- Filter -->
+                <div class="filter-container">
+                    <select id="status-filter">
+                        <option value="All">All Status</option>
+                        <option value="Scheduled">Scheduled</option>
+                        <option value="Ongoing">Ongoing</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="upload-btn">
+                        <i class="fas fa-upload"></i>
+                        Upload Material
+                    </button>
+                    <button id="create-poll-btn">
+                        <i class="fas fa-poll"></i>
+                        Create Poll
+                    </button>
+                    <button id="create-quiz-btn">
+                        <i class="fas fa-question-circle"></i>
+                        Create Quiz
+                    </button>
+                </div>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div id="countdown-timer" class="mb-4"></div>
+
+            <!-- Classes Table -->
+            <div class="classes-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>COURSE NAME</th>
+                            <th>START DATE & TIME</th>
+                            <th>STATUS</th>
+                            <th>REGISTERED STUDENTS</th>
+                            <th>TIME REMAINING</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="live-classes-body">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="liveclass.js"></script>
+    <script src="/pna/frontend/shared/auth.js"></script>
+</body>
+</html>

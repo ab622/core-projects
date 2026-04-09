@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Dashboard</title>
+    <link rel="stylesheet" href="/pna/frontend/Instractor/dashboard/dashboard.css">
+    <link rel="stylesheet" href="/pna/frontend/assets/css/jvectormap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap-world-mill.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="/pna/Img/PNA.png" alt="PNA Logo" class="pna-logo">
+            </div>
+            <ul class="nav-links">
+                <li class="active">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <span>Dashboard</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <span>Courses</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span>Students</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-money-bill"></i>
+                    </div>
+                    <span>Transactions</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <span>Chat</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <span>Schedule</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <span>Live Class</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span>Settings</span>
+                </li>
+                <li>
+                    <div class="icon-wrapper">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <span>Logout</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header>
+                <div class="header-left">
+                    <!-- يمكن إضافة أي عناصر يسار الهيدر هنا -->
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Search">
+                    <i class="fas fa-search"></i>
+                </div>
+                
+                <div class="header-right">
+                    <div class="user-profile">
+                        <img src="/pna/frontend/assets/images/profile-placeholder.jpg" alt="Profile">
+                        <span id="instructorName" class="user-name"></span>
+                        <div class="notification">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Upper Section -->
+            <div class="upper-section">
+                <!-- Charts Section -->
+                <div class="charts-section">
+                    <div class="activity-chart">
+                        <h3>User Activity</h3>
+                        <canvas id="activityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-numbers">
+                            <div class="stat-value" data-value="1234">0</div>
+                            <div class="stat-label">Total Students</div>
+                        </div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>12.5%</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-numbers">
+                            <div class="stat-value" data-value="1520">0</div>
+                            <div class="stat-label">Courses</div>
+                        </div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>12.5%</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="stat-numbers">
+                            <div class="stat-value" data-value="6000">0</div>
+                            <div class="stat-label">Total Video</div>
+                        </div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>12.5%</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-numbers">
+                            <div class="stat-value" data-value="70500">0</div>
+                            <div class="stat-label">Total Earning</div>
+                        </div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>12.5%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="bottom-section">
+                <div class="top-courses">
+                    <h3>Top Courses</h3>
+                    <div class="course-list">
+                        <div class="course-item">
+                            <div class="course-info">
+                                <div class="course-icon design">
+                                    <i class="fas fa-palette"></i>
+                                </div>
+                                <div class="course-details">
+                                    <h4>UI/UX Design</h4>
+                                    <p>24 Lessons</p>
+                                </div>
+                            </div>
+                            <div class="course-stats">
+                                <div class="amount">$150</div>
+                                <div class="sales">1.2k Sales</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-info">
+                                <div class="course-icon development">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="course-details">
+                                    <h4>Web Development</h4>
+                                    <p>32 Lessons</p>
+                                </div>
+                            </div>
+                            <div class="course-stats">
+                                <div class="amount">$180</div>
+                                <div class="sales">980 Sales</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-info">
+                                <div class="course-icon marketing">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                                <div class="course-details">
+                                    <h4>Digital Marketing</h4>
+                                    <p>18 Lessons</p>
+                                </div>
+                            </div>
+                            <div class="course-stats">
+                                <div class="amount">$120</div>
+                                <div class="sales">850 Sales</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="engagement-stats">
+                    <h3>Top Students Engagement</h3>
+                    <div class="students-list">
+                        <div class="student-card">
+                            <img src="https://i.pravatar.cc/150?img=1" alt="Student">
+                            <div class="student-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>Web Development</p>
+                            </div>
+                            <div class="engagement-score">
+                                <span class="score">98%</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 98%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="student-card">
+                            <img src="https://i.pravatar.cc/150?img=2" alt="Student">
+                            <div class="student-info">
+                                <h4>Mike Chen</h4>
+                                <p>UI/UX Design</p>
+                            </div>
+                            <div class="engagement-score">
+                                <span class="score">95%</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="student-card">
+                            <img src="https://i.pravatar.cc/150?img=3" alt="Student">
+                            <div class="student-info">
+                                <h4>Emma Davis</h4>
+                                <p>Digital Marketing</p>
+                            </div>
+                            <div class="engagement-score">
+                                <span class="score">92%</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="schedule">
+                    <h3>Schedule</h3>
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <span class="month-year">September 2023</span>
+                            <div class="calendar-nav">
+                                <button class="prev-month"><i class="fas fa-chevron-left"></i></button>
+                                <button class="next-month"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="weekdays">
+                            <span>Sun</span>
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                        </div>
+                        <div class="days">
+                            <!-- سيتم ملؤها بالـ JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Template -->
+    <div class="modal-template" style="display: none;">
+        <div class="stat-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3></h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="big-number"></div>
+                    <div class="details"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/pna/frontend/Instractor/dashboard/dashboard.js"></script>
+    <script src="/pna/backend/instructor/insructor_dashboard/instructor_dashboard.js"></script>
+    <script src="/pna/frontend/shared/auth.js"></script>
+</body>
+</html>

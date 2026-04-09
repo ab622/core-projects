@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions Dashboard</title>
+    <link rel="stylesheet" href="/pna/frontend/Instractor/dashboard/dashboard.css">
+    <link rel="stylesheet" href="/pna/frontend/assets/css/jvectormap.css">
+    <link rel="stylesheet" href="transactions.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap-world-mill.js"></script>
+</head>
+<body>
+    <div class="page-progress-container">
+        <div class="page-progress-bar"></div>
+    </div>
+
+    <div class="container">
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="/pna/Img/PNA.png" alt="PNA Logo" class="pna-logo">
+            </div>
+            <ul class="nav-links">
+                <li data-page="/pna/frontend/Instractor/dashboard/dashboard.html">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <span>Dashboard</span>
+                </li>
+                <li data-page="/pna/frontend/Instractor/Courses/courses.html">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <span>Courses</span>
+                </li>
+                <li data-page="/pna/frontend/Instractor/Students/students.html">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span>Students</span>
+                </li>
+                <li class="active" data-page="/pna/frontend/Instractor/Transactions/transactions.html">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-money-bill"></i>
+                    </div>
+                    <span>Transactions</span>
+                </li>
+                <li data-page="/pna/frontend/Instractor/chats/chats.html">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <span>Chat</span>
+                </li>
+                <li data-page="/pna/frontend/Instractor/Schedule/schedule.html">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <span>Schedule</span>
+                </li>
+                <li data-page="/pna/frontend/Instractor/LiveClass/liveclass.html">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <span>Live Class</span>
+                </li>
+                <li data-page="/pna/frontend/Instractor/Settings/settings.html">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span>Settings</span>
+                </li>
+                <li data-page="/pna/frontend/login.html">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <span>Logout</span>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <div class="dashboard-container">
+                <div class="transactions-top-section">
+                    <div id="revenue-chart-section">
+                        <h2>Revenue Trends</h2>
+                        <canvas id="revenue-chart"></canvas>
+                    </div>
+                    <div class="quick-stats-container">
+                        <div class="overview-cards">
+                            <div class="overview-card total-revenue">
+                                <div class="overview-card-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="overview-card-content">
+                                    <div class="overview-card-info">
+                                        <div class="overview-card-title">Total Revenue</div>
+                                        <div class="overview-card-amount">$3,030</div>
+                                    </div>
+                                    <div class="overview-card-trend trend-up">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>12%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="overview-card pending-payouts">
+                                <div class="overview-card-icon">
+                                    <i class="fas fa-hourglass-half"></i>
+                                </div>
+                                <div class="overview-card-content">
+                                    <div class="overview-card-info">
+                                        <div class="overview-card-title">Pending Payouts</div>
+                                        <div class="overview-card-amount">$1,600</div>
+                                    </div>
+                                    <div class="overview-card-trend trend-down">
+                                        <i class="fas fa-arrow-down"></i>
+                                        <span>5%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="overview-card completed-payouts">
+                                <div class="overview-card-icon">
+                                    <i class="fas fa-check-double"></i>
+                                </div>
+                                <div class="overview-card-content">
+                                    <div class="overview-card-info">
+                                        <div class="overview-card-title">Completed Payouts</div>
+                                        <div class="overview-card-amount">$930</div>
+                                    </div>
+                                    <div class="overview-card-trend trend-up">
+                                        <i class="fas fa-arrow-up"></i>
+                                        <span>8%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transactions Section -->
+                <section id="transactions-section">
+                    <div class="transactions-search">
+                        <input type="text" id="search-input" placeholder="Search transactions...">
+                        <div class="filter-dropdown">
+                            <select id="status-filter">
+                                <option value="">All Statuses</option>
+                                <option value="completed">Completed</option>
+                                <option value="pending">Pending</option>
+                                <option value="failed">Failed</option>
+                            </select>
+                        </div>
+                        <button id="bulk-export-btn" class="secondary-btn">
+                            <i class="fas fa-file-export"></i> Export CSV
+                        </button>
+                        <button id="bulk-update-btn" class="primary-btn">
+                            <i class="fas fa-edit"></i> Update Status
+                        </button>
+                    </div>
+
+                    <div class="transactions-table-container">
+                        <table class="transactions-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="select-all-checkbox">
+                                    </th>
+                                    <th>Transaction ID</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-body">
+                                <!-- Transactions will be dynamically populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Bulk Update Modal -->
+                <div id="bulk-update-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <div class="modal-header">
+                            <h3>Update Transaction Status</h3>
+                        </div>
+                        <div class="modal-body">
+                            <form id="bulk-update-form">
+                                <select id="bulk-status-select">
+                                    <option value="completed">Completed</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="failed">Failed</option>
+                                </select>
+                                <div class="modal-footer">
+                                    <button type="button" class="modal-btn secondary" id="cancel-update">Cancel</button>
+                                    <button type="submit" class="modal-btn primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transaction Details Modal -->
+                <div id="transaction-details-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h2>Transaction Details</h2>
+                        <div id="transaction-details-content"></div>
+                        <div class="modal-form-actions">
+                            <button type="button" class="btn-update close-modal">
+                                <i class="fas fa-check"></i>OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navigation functionality
+            const navLinks = document.querySelectorAll('.nav-links li');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    link.classList.add('active');
+                    
+                    // Get the page to navigate to
+                    const pagePath = link.getAttribute('data-page');
+                    
+                    if (pagePath) {
+                        // Navigate to the specified page
+                        window.location.href = pagePath;
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="transactions.js"></script>
+    <script src="/pna/frontend/shared/auth.js"></script>
+</body>
+</html>
